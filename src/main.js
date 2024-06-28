@@ -24,6 +24,7 @@ iziToast.settings({
   position: 'topRight',
 });
 
+
 const addImages = async (searchText, page = 1) => {
   try {
     const response = await getArr(searchText, page);
@@ -44,6 +45,12 @@ const addImages = async (searchText, page = 1) => {
       });
     }
 
+      const options = gallery.children.galleryItem.getBoundingClientRect();
+    window.scrollBy({
+      top: options.height * 2,
+      behavior: 'smooth',
+    });
+
     renderImages(response.data.hits, gallery);
   } catch (error) {
     error => console.error('Error', error);
@@ -51,13 +58,10 @@ const addImages = async (searchText, page = 1) => {
     form.reset();
     loader.style.display = 'none';
 
-    const options = gallery.children.galleryItem.getBoundingClientRect();
-    window.scrollBy({
-      top: options.height * 2,
-      behavior: 'smooth',
-    });
   }
 };
+
+
 
 const submitSearchForm = async e => {
   e.preventDefault();
@@ -73,6 +77,7 @@ const loadMore = async () => {
   page += 1;
   addImages(searchText, page);
 };
+
 
 form.addEventListener('submit', submitSearchForm);
 loadMoreBtn.addEventListener('click', loadMore);
