@@ -45,11 +45,6 @@ const addImages = async (searchText, page = 1) => {
       });
     }
 
-      const options = gallery.children.galleryItem.getBoundingClientRect();
-    window.scrollBy({
-      top: options.height * 2,
-      behavior: 'smooth',
-    });
 
     renderImages(response.data.hits, gallery);
   } catch (error) {
@@ -57,8 +52,13 @@ const addImages = async (searchText, page = 1) => {
   } finally {
     form.reset();
     loader.style.display = 'none';
-
   }
+
+        const options = gallery.children.galleryItem.getBoundingClientRect();
+    window.scrollBy({
+      top: options.height * 2,
+      behavior: 'smooth',
+    });
 };
 
 
